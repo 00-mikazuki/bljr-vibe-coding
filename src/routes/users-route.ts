@@ -25,6 +25,24 @@ export const usersRoute = new Elysia({ prefix: '/api' })
       set.status = 401;
       return { error: 'Unauthorized' };
     }
+  }, {
+    detail: {
+      summary: 'Dapatkan data pengguna saat ini',
+      description: 'Mengambil profil pengguna yang sedang login berdasarkan token bearer.'
+    },
+    response: {
+      200: t.Object({
+        data: t.Object({
+          id: t.Number(),
+          name: t.String(),
+          email: t.String({ format: 'email' }),
+          createdAt: t.Date()
+        })
+      }, { description: 'Data profil berhasil diambil' }),
+      401: t.Object({
+        error: t.String()
+      }, { description: 'Sesi tidak valid atau token tidak ditemukan' })
+    }
   })
   .post('/users', async ({ body, set }) => {
     try {
@@ -39,11 +57,26 @@ export const usersRoute = new Elysia({ prefix: '/api' })
       return { error: 'Internal Server Error' };
     }
   }, {
+    detail: {
+      summary: 'Registrasi pengguna baru',
+      description: 'Mendaftarkan akun baru ke dalam sistem.'
+    },
     body: t.Object({
       name: t.String({ maxLength: 255 }),
       email: t.String({ format: 'email', maxLength: 255 }),
       password: t.String({ maxLength: 255 })
-    })
+    }),
+    response: {
+      200: t.Object({
+        data: t.String()
+      }, { description: 'Registrasi berhasil' }),
+      400: t.Object({
+        error: t.String()
+      }, { description: 'Email sudah terdaftar' }),
+      500: t.Object({
+        error: t.String()
+      }, { description: 'Terjadi kesalahan pada server' })
+    }
   })
   .post('/users/login', async ({ body, set }) => {
     try {
@@ -58,10 +91,25 @@ export const usersRoute = new Elysia({ prefix: '/api' })
       return { error: 'Internal Server Error' };
     }
   }, {
+    detail: {
+      summary: 'Login pengguna',
+      description: 'Otentikasi pengguna untuk mendapatkan token sesi.'
+    },
     body: t.Object({
       email: t.String({ format: 'email' }),
       password: t.String()
-    })
+    }),
+    response: {
+      200: t.Object({
+        data: t.String()
+      }, { description: 'Login berhasil, token diberikan' }),
+      401: t.Object({
+        error: t.String()
+      }, { description: 'Email atau password salah' }),
+      500: t.Object({
+        error: t.String()
+      }, { description: 'Terjadi kesalahan pada server' })
+    }
   })
   .delete('/users/logout', async ({ headers, set }) => {
     try {
@@ -71,5 +119,18 @@ export const usersRoute = new Elysia({ prefix: '/api' })
     } catch (error: any) {
       set.status = 401;
       return { error: 'Unauthorized' };
+    }
+  }, {
+    detail: {
+      summary: 'Logout pengguna',
+      description: 'Menghapus sesi aktif berdasarkan token bearer yang diberikan.'
+    },
+    response: {
+      200: t.Object({
+        data: t.String()
+      }, { description: 'Logout berhasil' }),
+      401: t.Object({
+        error: t.String()
+      }, { description: 'Sesi tidak valid atau sudah logout' })
     }
   });
