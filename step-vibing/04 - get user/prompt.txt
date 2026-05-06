@@ -1,0 +1,41 @@
+Buatkan issue.md yang berisi planning untuk nanti di implementasikan oleh Junior Programmer atau AI model yang lebih murah
+
+Isi dari perencanaannya sebagai berikut:
+
+
+buatkan API untuk get user saat ini yang sedang login
+
+Endpoint: GET /api/users/current
+
+Headers:
+{
+  Authorization: `Bearer ${token}` (token adalah token pada tabel sessions)
+}
+
+
+Response Body (Success):
+{
+  "data": {
+    "id": 1,
+    "name": "juan",
+    "email": "juan@email.com",
+    "created_at": "timestamp"
+  }
+}
+
+Response Body (Error):
+{
+  "error": "Unauthorized"
+}
+
+
+Struktur folder dalam src
+- routes: ini berisi routing elysiajs
+- services: ini berisi logic bisnis aplikasi
+
+Struktur file
+- routes: menggunakan format misal users-route.ts
+- services: menggunakan format misal users-service.ts
+
+
+Jelaskan tahapan-tahapan yang harus dilakukan untuk mengimplementasikan fitur ini, anggap nanti yang mengimplementasikan adalah junior programmer atau model AI yang lebih murah.

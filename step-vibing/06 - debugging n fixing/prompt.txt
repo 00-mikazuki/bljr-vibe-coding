@@ -1,0 +1,5 @@
+jalankan aplikasinya lalu registrasi user baru dengan name panjangnya 300 karakter
+
+buatkan issue.md untuk bug ini, jelaskan tahapan cara memperbaikinya untuk junior programmer atau model yang lebih murah
+
+submit issue.md sebagai bug issue baru di github

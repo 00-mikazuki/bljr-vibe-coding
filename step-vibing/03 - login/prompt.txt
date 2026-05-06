@@ -1,0 +1,43 @@
+Buatkan issue.md berisi planning untuk nanti di implementasikan oleh Junior Programmer atau AI model yang lebih murah
+
+Isi dari perencanaannya sebagai berikut:
+
+
+buat tabel sessions:
+id integer auto increment
+token varchar 255 not null (berisi UUID untuk user yang sedang login)
+user_id integer not null (foreign key ke tabel users)
+created_at timestamp default current_timestamp
+
+
+buatkan API untuk login user
+
+Endpoint: POST /api/users/login
+
+Request Body:
+{
+  "email": "juan@email.com",
+  "password": "rahasia"
+}
+
+Response Body (Success):
+{
+  "data": "token"
+}
+
+Response Body (Error):
+{
+  "error": "Email atau password salah"
+}
+
+
+Struktur folder dalam src
+- routes: ini berisi routing elysiajs
+- services: ini berisi logic bisnis aplikasi
+
+Struktur file
+- routes: menggunakan format misal users-route.ts
+- services: menggunakan format misal users-service.ts
+
+
+Jelaskan tahapan-tahapan yang harus dilakukan untuk mengimplementasikan fitur ini, anggap nanti yang mengimplementasikan adalah junior programmer atau model AI yang lebih murah.
